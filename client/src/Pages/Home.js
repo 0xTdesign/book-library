@@ -6,8 +6,8 @@ import CreateBook from "../Components/CreateBook/CreateBook";
 export default function Home({ createNewBook, handleChangeCreate, createForm, deleteBook, books }) {
   return (
     <div>
-      <Book books={books} deleteBook={deleteBook} />
       <CreateBook createNewBook={createNewBook} handleChangeCreate={handleChangeCreate} createForm={createForm} />
+      <Book books={books} deleteBook={deleteBook} />
     </div>
   );
 }

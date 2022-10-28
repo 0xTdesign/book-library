@@ -1,0 +1,47 @@
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: block;
+  justify-content: center;
+}
+
+form input {
+  text-transform: capitalize;
+  padding: 10px;
+  border-radius: 4px;
+  line-height: 1.2rem;
+}
+
+form ::placeholder {
+  font-size: 1.2rem;
+}
+
+.form-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.search-btn {
+  cursor: pointer;
+  margin: 5px;
+  height: 42px;
+  background-color: #333;
+  color: wheat;
+  border: 2px solid wheat;
+  border-radius: 4px;
+  width: 164px;
+  font-size: 1rem;
+}
+
+.search-btn:hover {
+  background-color: wheat;
+  color: #333;
+}
