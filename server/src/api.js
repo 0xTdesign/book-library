@@ -18,12 +18,12 @@ const PORT = process.env.PORT || 8080;
 
 mongoose.connect(process.env.DATABASE_URL);
 
-app.get("/", (req, res) => {
+app.get("/.netlify/functions/api", (req, res) => {
   res.json("HOME MA BRU!!!!!");
 });
 
 //Retrieve all books
-app.get("/books", async (req, res) => {
+app.get("/.netlify/functions/api/books", async (req, res) => {
   try {
     // try and make a call to the database
     const allBooks = await Book.find();
@@ -36,7 +36,7 @@ app.get("/books", async (req, res) => {
 });
 
 // retrieve a specific book
-app.get("/books/:id", async (req, res) => {
+app.get("/.netlify/functions/api/books/:id", async (req, res) => {
   try {
     const theBook = await Book.find({ _id: req.params.id });
     res.status(200).json(theBook);
@@ -47,7 +47,7 @@ app.get("/books/:id", async (req, res) => {
 });
 
 // Create a new book
-app.post("/books", async (req, res) => {
+app.post("/.netlify/functions/api/books", async (req, res) => {
   try {
     const newBook = await Book.create(req.body);
     res.status(200).json(newBook);
@@ -56,8 +56,6 @@ app.post("/books", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// https://covers.openlibrary.org/b/id/12547191-L.jpg
 
 // Update a book
 app.put("/books/:id", async (req, res) => {
@@ -84,16 +82,17 @@ app.delete("/books/:id", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`App is listening on port${PORT}`));
+//Old way of starting the Server.
+// app.listen(PORT, () => console.log(`App is listening on port${PORT}`));
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
 
 //New netlify way to start the server
 
-// const handler = serverless(app);
+const handler = serverless(app);
 
-// module.exports.handler = async (event, context) => {
-//   const result = await handler(event, context);
-//   // you can do any code here
-//   return result;
-// };
+module.exports.handler = async (event, context) => {
+  const result = await handler(event, context);
+  // you can do any code here
+  return result;
+};
